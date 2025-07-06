@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGS - Arapiraca Geotecnia e Sondagem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0a0f3d;
+            --light-gray: #f8f9fa;
+            --medium-gray: #6c757d;
+            --white: #ffffff;
+            --accent-blue: #1e3a8a;
+            --gradient: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            --light-blue: #f0f4ff;
+            --ultra-light-blue: #f8faff;
+            --soft-gray: #f5f6fa;
+            --warm-gray: #f7f8fc;
+            --section-gradient: linear-gradient(135deg, #f8faff 0%, #f0f4ff 100%);
+            --reverse-gradient: linear-gradient(135deg, #f0f4ff 0%, #f8faff 100%);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            /* About Section - Mobile Small */
+            .about-content {
+                gap: 1.8rem;
+            }
+
+            .about-text h3 {
+                font-size: 1.2rem;
+                margin-bottom: 0.7rem;
+                line-height: 1.2;
+            }
+
+            .about-text p {
+                font-size: 0.85rem;
+                line-height: 1.6;
+                margin-bottom: 1rem;
+            }
+
+            .about-image img {
+                max-height: 220px;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+
+            .hero-features {
+                flex-direction: row;
+                gap: 0.8rem;
+                margin-top: 2rem;
+                max-width: 100%;
+                overflow-x: auto;
+            }
+
+            .hero-feature {
+                flex: 1;
+                min-width: 180px;
+                max-width: none;
+            }
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(10, 15, 61, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            min-height: 85px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            margin-right: 4rem;
+        }
+
+        .logo img {
+            height: 70px;
+            width: auto;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.8rem;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+            background-color: rgba(30, 58, 138, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        .mobile-menu {
+            display: none;
+            color: var(--primary-blue);
+            font-size: 1.6rem;
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu:hover {
+            background-color: rgba(30, 58, 138, 0.08);
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(10, 15, 61, 0.8), rgba(30, 58, 138, 0.8)), url('8r3_FPBzBLvaBJaa_Qoq7') center/cover no-repeat;
+            color: var(--white);
+            padding: 140px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 15, 61, 0.2);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+
+        .hero .hero-subtitle {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: #e0e7ff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            line-height: 1.6;
+            max-width: 580px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary-blue);
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            background: #f8f9fa;
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .cta-button.secondary:hover {
+            transform: translateY(-3px);
+            background: var(--white);
+            color: var(--primary-blue);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-features {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 1.5rem;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-feature {
+            text-align: center;
+            opacity: 0.92;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.2rem 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 220px;
+            max-width: 280px;
+        }
+
+        .hero-feature:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .hero-feature i {
+            font-size: 2rem;
+            margin-bottom: 0.7rem;
+            color: #e0e7ff;
+            display: block;
+        }
+
+        .hero-feature h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .hero-feature p {
+            font-size: 0.8rem;
+            opacity: 0.85;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.5;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* About Section - Gradient suave */
+        #about {
+            background: var(--section-gradient);
+            border-top: 1px solid rgba(10, 15, 61, 0.1);
+        }
+
+        #about::before {
+            background: linear-gradient(45deg, transparent 0%, rgba(30, 58, 138, 0.03) 50%, transparent 100%);
+        }
+
+        /* Values Section - Azul mais escuro */
+        #values {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            color: var(--white);
+        }
+
+        #values .section-title {
+            color: var(--white);
+        }
+
+        #values .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Team Section - Gradient reverso */
+        #team {
+            background: var(--reverse-gradient);
+            border-top: 1px solid rgba(10, 15, 61, 0.1);
+        }
+
+        #team::before {
+            background: linear-gradient(-45deg, transparent 0%, rgba(30, 58, 138, 0.03) 50%, transparent 100%);
+        }
+
+        /* Services Section - Branco com sombra */
+        #services {
+            background: var(--white);
+            box-shadow: inset 0 1px 0 rgba(10, 15, 61, 0.1);
+        }
+
+        #services::before {
+            background: radial-gradient(circle at 50% 50%, rgba(10, 15, 61, 0.02) 0%, transparent 70%);
+        }
+
+        /* Testimonials Section - Gradient suave */
+        #testimonials {
+            background: var(--section-gradient);
+            border-top: 1px solid rgba(10, 15, 61, 0.1);
+        }
+
+        #testimonials::before {
+            background: linear-gradient(135deg, transparent 0%, rgba(30, 58, 138, 0.03) 50%, transparent 100%);
+        }
+
+        /* FAQ Section - Cinza quente */
+        #faq {
+            background: var(--warm-gray);
+            border-top: 1px solid rgba(10, 15, 61, 0.1);
+        }
+
+        #faq::before {
+            background: linear-gradient(45deg, rgba(10, 15, 61, 0.02) 0%, transparent 50%, rgba(10, 15, 61, 0.02) 100%);
+        }
+
+        /* Contact Section - Branco puro */
+        #contact {
+            background: var(--white);
+            box-shadow: inset 0 1px 0 rgba(10, 15, 61, 0.1);
+        }
+
+        #contact::before {
+            background: radial-gradient(ellipse at center, rgba(10, 15, 61, 0.02) 0%, transparent 70%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--medium-gray);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--medium-gray);
+            line-height: 1.8;
+            font-size: 1rem;
+            text-align: justify;
+        }
+
+        .about-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(10, 15, 61, 0.15);
+            transition: all 0.3s ease;
+            object-fit: cover;
+        }
+
+        .about-image img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(10, 15, 61, 0.2);
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .value-card i {
+            font-size: 3rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .value-card h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .value-card p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(10, 15, 61, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(10, 15, 61, 0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(10, 15, 61, 0.15);
+            border-color: rgba(30, 58, 138, 0.1);
+        }
+
+        .service-image {
+            height: 200px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary-blue);
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-content h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-content p {
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .service-button {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .service-button:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Testimonials */
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(10, 15, 61, 0.08);
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(10, 15, 61, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(10, 15, 61, 0.12);
+        }
+
+        .testimonial p {
+            font-size: 1.1rem;
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .testimonial-quote {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(10, 15, 61, 0.08);
+            border: 1px solid rgba(10, 15, 61, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(10, 15, 61, 0.12);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: var(--primary-blue);
+            color: var(--white);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            display: none;
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(10, 15, 61, 0.1);
+            border: 1px solid rgba(10, 15, 61, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .contact-info:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(10, 15, 61, 0.15);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-right: 1rem;
+            width: 30px;
+        }
+
+        .contact-item span {
+            color: var(--medium-gray);
+        }
+
+        .map-container {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--ultra-light-blue) 100%);
+            border-radius: 15px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--medium-gray);
+            font-size: 1.2rem;
+            border: 1px solid rgba(10, 15, 61, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .map-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(10, 15, 61, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: var(--white);
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .nav-links {
+                gap: 2.2rem;
+            }
+
+            .logo {
+                margin-right: 3rem;
+            }
+
+            /* About Section - Large Tablet */
+            .about-content {
+                gap: 3.5rem;
+            }
+
+            .about-text h3 {
+                font-size: 1.45rem;
+            }
+
+            .about-text p {
+                font-size: 0.98rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links {
+                gap: 1.8rem;
+            }
+
+            .nav-links a {
+                font-size: 0.95rem;
+                padding: 0.6rem 1rem;
+            }
+
+            .logo {
+                margin-right: 2.5rem;
+            }
+
+            .logo img {
+                height: 62px;
+            }
+
+            nav {
+                padding: 1rem 0;
+                min-height: 80px;
+            }
+
+            /* About Section - Tablet */
+            .about-content {
+                gap: 3rem;
+                align-items: start;
+            }
+
+            .about-text h3 {
+                font-size: 1.4rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .about-text p {
+                font-size: 0.95rem;
+                margin-bottom: 1.3rem;
+                line-height: 1.7;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .about-text {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                min-height: 75vh;
+                padding: 130px 0 70px;
+            }
+
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+
+            .hero .hero-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero-features {
+                flex-wrap: wrap;
+                gap: 1rem;
+                margin-top: 2.5rem;
+                max-width: 600px;
+            }
+
+            .hero-feature {
+                flex: 1 1 calc(50% - 0.5rem);
+                min-width: 200px;
+            }
+
+            .hero-feature {
+                padding: 1.2rem 0.8rem;
+            }
+
+            .hero-feature i {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+                flex-direction: column;
+                padding: 1.5rem 0;
+                gap: 0;
+                border-top: 1px solid rgba(10, 15, 61, 0.1);
+            }
+
+            .nav-links.mobile-active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1.2rem 2rem;
+                border-bottom: 1px solid var(--light-gray);
+                width: 100%;
+                border-radius: 0;
+                background: none;
+                font-size: 1rem;
+                font-weight: 500;
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .nav-links a:hover {
+                background-color: var(--light-gray);
+                transform: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .logo img {
+                height: 55px;
+            }
+
+            .logo {
+                margin-right: 1.5rem;
+            }
+
+            nav {
+                position: relative;
+                min-height: 75px;
+                padding: 1rem 0;
+            }
+
+            .hero {
+                min-height: 70vh;
+                padding: 110px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 1.8rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                margin-right: 0;
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+
+            .hero-feature {
+                padding: 1rem 0.8rem;
+            }
+
+            .hero-feature i {
+                font-size: 1.8rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .hero-feature h3 {
+                font-size: 0.9rem;
+            }
+
+            .hero-feature p {
+                font-size: 0.8rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            /* About Section - Mobile */
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: left;
+            }
+
+            .about-text {
+                order: 2;
+            }
+
+            .about-image {
+                order: 1;
+                margin-bottom: 1rem;
+            }
+
+            .about-text h3 {
+                font-size: 1.3rem;
+                margin-bottom: 0.8rem;
+                text-align: left;
+                line-height: 1.2;
+            }
+
+            .about-text p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+                margin-bottom: 1.2rem;
+                text-align: left;
+            }
+
+            .about-image img {
+                border-radius: 12px;
+                box-shadow: 0 10px 25px rgba(10, 15, 61, 0.12);
+                max-height: 250px;
+                object-fit: cover;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding: 50px 0;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+
+            /* About Section - Extra Small Mobile */
+            .about-content {
+                gap: 1.5rem;
+            }
+
+            .about-text h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.6rem;
+                line-height: 1.2;
+            }
+
+            .about-text p {
+                font-size: 0.8rem;
+                line-height: 1.5;
+                margin-bottom: 0.8rem;
+            }
+
+            .about-image {
+                margin-bottom: 0.5rem;
+            }
+
+            .about-image img {
+                border-radius: 10px;
+                box-shadow: 0 8px 20px rgba(10, 15, 61, 0.1);
+                max-height: 200px;
+                object-fit: cover;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Smooth section transitions */
+        .section {
+            transition: all 0.5s ease;
+        }
+
+        .section:hover::before {
+            opacity: 0.7;
+        }
+
+        /* Card hover effects */
+        .service-card, .testimonial, .faq-item, .contact-info, .value-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Parallax effect for sections */
+        @media (min-width: 768px) {
+            .section::before {
+                will-change: transform;
+                transition: transform 0.3s ease;
+            }
+            
+            .section:hover::before {
+                transform: translateY(-2px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#home" class="logo">
+                <img src="dPeKkFy4z6iYHR3DZmvIB" alt="AGS - Arapiraca Geotecnia e Sondagem">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">A Empresa</a></li>
+                <li><a href="#values">Valores</a></li>
+                <li><a href="#team">Equipe</a></li>
+                <li><a href="#services">Serviços</a></li>
+                <li><a href="#testimonials">Depoimentos</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>AGS Geotecnia</h1>
+                <div class="hero-subtitle">Arapiraca Geotecnia e Sondagem</div>
+                <p>Especialistas em sondagem e análise geotécnica com mais de uma década de experiência. Oferecemos soluções precisas e confiáveis para seus projetos de construção e engenharia.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="cta-button secondary">Solicite um Orçamento</a>
+                    <a href="#services" class="cta-button secondary">Nossos Serviços</a>
+                </div>
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <i class="fas fa-award"></i>
+                        <h3>Qualidade Garantida</h3>
+                        <p>Equipamentos modernos e equipe especializada</p>
+                    </div>
+                    <div class="hero-feature">
+                        <i class="fas fa-clock"></i>
+                        <h3>Agilidade</h3>
+                        <p>Resultados rápidos e confiáveis</p>
+                    </div>
+                    <div class="hero-feature">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Arapiraca - AL</h3>
+                        <p>Atendemos toda a região</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Quem Somos</h2>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h3>Nossa História</h3>
+                    <p>A AGS - Arapiraca Geotecnia e Sondagem nasceu da necessidade de oferecer serviços especializados em geotecnia com a mais alta qualidade técnica na região de Arapiraca e todo o estado de Alagoas.</p>
+                    
+                    <h3>Missão</h3>
+                    <p>Fornecer soluções técnicas precisas e confiáveis em geotecnia, garantindo segurança e qualidade em todos os projetos.</p>
+                    
+                    <h3>Visão</h3>
+                    <p>Ser referência em serviços geotécnicos na região, reconhecida pela excelência técnica e compromisso com nossos clientes.</p>
+                </div>
+                <div class="about-image fade-in">
+                    <img src="keys/team-field?prompt=Professional%20geotechnical%20engineering%20team%20working%20on%20construction%20site%2C%20wearing%20safety%20equipment%2C%20Brazilian%20professionals" alt="Equipe AGS em campo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section id="values" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Nossos Valores</h2>
+            <div class="values-grid">
+                <div class="value-card fade-in">
+                    <i class="fas fa-award"></i>
+                    <h3>Qualidade</h3>
+                    <p>Compromisso com a excelência em todos os serviços prestados, utilizando equipamentos de última geração.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Especialização</h3>
+                    <p>Atendimento técnico especializado com profissionais qualificados e experientes.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Segurança</h3>
+                    <p>Responsabilidade ambiental e segurança em todos os processos de trabalho.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Ética</h3>
+                    <p>Transparência e ética em todas as relações comerciais e técnicas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Nossa Equipe Especializada</h2>
+            <p class="section-subtitle fade-in">Contamos com profissionais qualificados: geólogos, engenheiros civis e técnicos de campo experientes, todos comprometidos com a excelência técnica.</p>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h3>Perfil Técnico</h3>
+                    <p><strong>Geólogos:</strong> Especialistas em análise de solo e subsolo, identificação de características geotécnicas e elaboração de laudos técnicos.</p>
+                    <p><strong>Engenheiros Civis:</strong> Profissionais especializados em fundações, estruturas e projetos de engenharia.</p>
+                    <p><strong>Técnicos de Campo:</strong> Equipe experiente na operação de equipamentos de sondagem e coleta de amostras.</p>
+                </div>
+                <div class="about-image fade-in">
+                    <img src="keys/team-professionals?prompt=Professional%20team%20of%20geologists%20and%20civil%20engineers%20in%20office%20environment%2C%20Brazilian%20professionals%2C%20technical%20documents" alt="Equipe Técnica AGS">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Portfólio de Serviços</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Sondagem SPT</h3>
+                        <p>Sondagem de Simples Reconhecimento à Percussão para determinação da resistência e classificação do solo.</p>
+                        <div style="margin: 1rem 0;">
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                                <div style="flex: 1; min-width: 250px; max-width: 350px;">
+                                    <video controls width="100%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(10, 15, 61, 0.1);">
+                                        <source src="keys/sondagem-video-1?prompt=Professional%20geotechnical%20drilling%20SPT%20test%20in%20action%2C%20construction%20site%2C%20Brazilian%20workers" type="video/mp4">
+                                        Seu navegador não suporta o elemento de vídeo.
+                                    </video>
+                                    <p style="text-align: center; font-size: 0.9rem; color: var(--medium-gray); margin-top: 0.5rem;">Processo de Sondagem SPT</p>
+                                </div>
+                                <div style="flex: 1; min-width: 250px; max-width: 350px;">
+                                    <video controls width="100%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(10, 15, 61, 0.1);">
+                                        <source src="keys/sondagem-video-2?prompt=Geotechnical%20soil%20analysis%20and%20drilling%20equipment%20operation%2C%20field%20work%2C%20professional%20team" type="video/mp4">
+                                        Seu navegador não suporta o elemento de vídeo.
+                                    </video>
+                                    <p style="text-align: center; font-size: 0.9rem; color: var(--medium-gray); margin-top: 0.5rem;">Análise de Solo e Equipamentos</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#contact" class="service-button">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Teste de Percolação</h3>
+                        <p>Ensaio para determinação da capacidade de absorção do solo, essencial para projetos de sistemas de tratamento de efluentes.</p>
+                        <a href="#contact" class="service-button">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Laudos Técnicos</h3>
+                        <p>Elaboração de relatórios técnicos detalhados com análise e interpretação dos resultados dos ensaios realizados.</p>
+                        <a href="#contact" class="service-button">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Ensaios de Campo</h3>
+                        <p>Realização de diversos ensaios in-situ para caracterização geotécnica do terreno.</p>
+                        <a href="#contact" class="service-button">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Identificação de Solo</h3>
+                        <p>Análise e classificação detalhada dos tipos de solo encontrados no local da obra.</p>
+                        <a href="#contact" class="service-button">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Suporte para Fundações</h3>
+                        <p>Serviços especializados para projetos de fundações e construções em geral.</p>
+                        <a href="#contact" class="service-button">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Depoimentos de Clientes</h2>
+            <p class="section-subtitle fade-in">A confiança de nossos clientes é o nosso maior reconhecimento.</p>
+            <div class="testimonials-container">
+                <div class="testimonial fade-in">
+                    <div class="testimonial-quote">"</div>
+                    <p>"Excelente trabalho da equipe AGS. Serviço técnico de alta qualidade e pontualidade na entrega dos resultados. Recomendo para qualquer projeto que necessite de sondagem geotécnica."</p>
+                    <div class="testimonial-author">- João Silva, Engenheiro Civil</div>
+                </div>
+                <div class="testimonial fade-in">
+                    <div class="testimonial-quote">"</div>
+                    <p>"Profissionais competentes e equipamentos modernos. A AGS nos forneceu todas as informações necessárias para o desenvolvimento do nosso projeto de fundações com total segurança."</p>
+                    <div class="testimonial-author">- Maria Santos, Arquiteta</div>
+                </div>
+                <div class="testimonial fade-in">
+                    <div class="testimonial-quote">"</div>
+                    <p>"Atendimento excepcional e laudos técnicos muito bem elaborados. A AGS demonstrou grande conhecimento técnico e agilidade na execução dos serviços."</p>
+                    <div class="testimonial-author">- Pedro Costa, Construtor</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Dúvidas Frequentes</h2>
+            <div class="faq-container">
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>Como funciona o teste de percolação?</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        O teste de percolação mede a capacidade de absorção do solo através da escavação de buracos específicos, preenchimento com água e medição do tempo de infiltração. É essencial para projetos de sistemas sépticos e drenagem.
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>O que é a sondagem SPT?</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        A sondagem SPT (Standard Penetration Test) é um ensaio de campo que determina a resistência do solo através da penetração de um amostrador padrão. Fornece informações sobre a capacidade de suporte do terreno.
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>Quanto tempo demora para realizar o serviço?</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        O tempo varia conforme o tipo de serviço e as condições do terreno. Uma sondagem SPT típica pode levar de 1 a 3 dias, enquanto testes de percolação podem ser realizados em algumas horas.
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>É necessário estar no local para realizar o serviço?</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Não é obrigatório, mas recomendamos que o cliente ou responsável esteja presente para esclarecer dúvidas sobre o terreno e acompanhar o processo. Coordenamos previamente o melhor horário.
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>Para que tipo de construção é obrigatório o laudo geotécnico?</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        O laudo geotécnico é obrigatório para construções com mais de 2 pavimentos, obras de grande porte, projetos próximos a encostas e sempre que exigido pela prefeitura ou órgãos competentes.
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>Posso solicitar um orçamento pelo WhatsApp?</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Sim! Nosso atendimento pelo WhatsApp está disponível para esclarecimentos, orçamentos e agendamentos. Entre em contato e nossa equipe responderá rapidamente.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Localização e Contato</h2>
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 2rem;">Entre em Contato</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Arapiraca - AL</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>(82) 99999-9999</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-instagram"></i>
+                        <span>@agsgeotecnia</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contato@agsgeotecnia.com.br</span>
+                    </div>
+                    <div style="margin-top: 2rem;">
+                        <a href="#" class="cta-button">Ver rotas no Google Maps</a>
+                    </div>
+                </div>
+                <div class="map-container fade-in">
+                    <div>
+                        <i class="fas fa-map" style="font-size: 3rem; color: var(--primary-blue); margin-bottom: 1rem;"></i>
+                        <br>
+                        <span>Mapa de Localização</span>
+                        <br>
+                        <small>Arapiraca - AL</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AGS Geotecnia</h3>
+                    <p>Engenharia com responsabilidade.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Menu Rápido</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">A Empresa</a></li>
+                        <li><a href="#services">Serviços</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Serviços</h3>
+                    <ul>
+                        <li><a href="#services">Sondagem SPT</a></li>
+                        <li><a href="#services">Teste de Percolação</a></li>
+                        <li><a href="#services">Laudos Técnicos</a></li>
+                        <li><a href="#services">Ensaios de Campo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li>Arapiraca - AL</li>
+                        <li>(82) 99999-9999</li>
+                        <li>contato@agsgeotecnia.com.br</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AGS - Arapiraca Geotecnia e Sondagem. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // FAQ functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                // Close all other answers
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    if (ans !== answer) {
+                        ans.classList.remove('active');
+                    }
+                });
+                
+                // Reset all icons
+                document.querySelectorAll('.faq-question i').forEach(i => {
+                    if (i !== icon) {
+                        i.className = 'fas fa-plus';
+                    }
+                });
+                
+                // Toggle current answer
+                answer.classList.toggle('active');
+                icon.className = answer.classList.contains('active') ? 'fas fa-minus' : 'fas fa-plus';
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--white)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('mobile-active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('mobile-active');
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav') && navLinks.classList.contains('mobile-active')) {
+                navLinks.classList.remove('mobile-active');
+            }
+        });
+
+        // Responsive mobile menu
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.classList.remove('mobile-active');
+            }
+        });
+    </script>
+</body>
+</html>
